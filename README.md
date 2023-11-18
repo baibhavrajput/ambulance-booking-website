@@ -1,77 +1,109 @@
-# Tripfinder Boat Documentation
+# Introduction
 
-## Introduction
+## TripFinder. - A React Next Rental and Listing Template
 
-Fastest E-commerce template built with `React`, `NextJS`, `TypeScript` and `Tailwind CSS`. It's very easy to use, we used `static` data. You can setup your api endpoint's very easily and your frontend team will love using it.
+This template built with React, NextJS, TypeScript, Styled-Components, HeadlessUI, TailwindCSS, Google Map API, & AntDesign. It's a very easy to use template, comes with ready made beautiful components, those helps you to build your amazing react next js application.
 
-## Requirements
+#### Demo Link: 
+- https://tripfinder-boat.vercel.app/
+- https://tripfinder-hotel.vercel.app/
 
-- node(18.11.11 or later)
-- yarn(version 1)
-- editor: Visual Studio Code(recommended)
+#### Support Link: https://redqsupport.ticksy.com/
 
-## Tech We Have Used
+<br>
 
-Tech specification for this template is given below
+# Getting Started
 
-- [React](https://reactjs.org/)
-- [NextJs](https://nextjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
+After downloading the file from ThemeForest, You will find tripfinder.zip file. Unzip the tripfinder.zip and Follow the Installation guideline.
 
-## Getting Started & Installation
+<br>
 
-For getting started with the template you have to follow the below procedure. First navigate to the `boat` directory.
+## Installation
 
-### Step 1 : Configure your env file
+Make sure you have Node & Yarn installed in your system. Recommended node version >=v16.17.0 and yarn v1.21.1. You check your ones by running these commands-
 
-Within the project directory you'll find a `.env.example` file just rename it as `.env.local`.
+```
+node -v
 
-** NOTE : ** This file contain `env values` for local development but when you wanna use this template for your needs you need to replace this value with `your own real API endpoint`.
-
-** NOTE : ** To get the map in development mode, go to your `.env.local` file and put your google map api key there like `NEXT_PUBLIC_GOOGLE_API_KEY= put your api key`
-
-<br/>
-<br/>
-<br/>
-
-### Step 2 : Running the project
-
-Run below command for getting started with this template.
-
-```bash
-# on tripfinder or in root directory
-$ yarn
-
-$ yarn dev
-# which will running the boat template for development
+yarn -v
 ```
 
-If you want to test your production build in local environment then run the below commands.
+If it's not installed in your system then please install them by checking official documentation of,
 
-```bash
-# build for production
-yarn build
+1. https://nodejs.org/en/
+2. https://yarnpkg.com/lang/en/docs/install/
 
-#start template in production mode
-yarn start
+> ### Before starting the project, you need to configure the .env.local file for the of our packages.
+
+<br/>
+
+## Configuration
+
+### Hotel
+
+For configuring hotel package, go to `packages/hotel/` and create `.env.local` file and configure it with your information in the `.env.local` file.
+
+```
+REACT_APP_GOOGLE_MAP_API_KEY=https://maps.googleapis.com/maps/api/js?v=3.exp&key=YOUR_GOOGLE_API_KEY&libraries=geometry,drawing,places
 ```
 
-## Folder Structure & Customization
+### Hotel Next
 
-- To setup you site's basic information like **[Logo,Site title,Description etc]** go to -> `boat/src/app/layout.tsx` file
-- To customize tailwind configuration go to -> `tailwind.config.js` file .
-- `/public`: This folder contains `all the static data` used in this project.
-- `/src/app`: This folder contains all the pages and layouts.
-- `/src/components`: This folder contains all the template related ui components.
-- `/src/components/ui`: This folder contains all the common sections related components.
-- `/src/contexts`: This folder contains all necessary context for this template . Like `modal, drawer, gallery` etc.
-- `/src/styles`: Overwrites some third party packages CSS files and our custom CSS in the `global.css` file.
-- `/src/hooks` : This folder contains `hooks` etc.
-- `/src/config` : This folder contains `routes, api-endpoints, constants` etc.
-- `/src/pages` : This folder contains `404.tsx` file for not found or unmatching routes.
-- `/src/types` : This folder contains common used types arround this project.
+After creating a `.env.local` file at the root of the hotel-next directory then copy and paste below env variables and replace those variable values with your information.
 
-<br/>
-<br/>
-<br/>
+```
+NEXT_PUBLIC_REACT_APP_GOOGLE_MAP_API_KEY=https://maps.googleapis.com/maps/api/js?v=3.exp&key=YOUR_GOOGLE_MAP_API_KEY&libraries=geometry,drawing,places
+NEXT_PUBLIC_SERVER_API=YOUR_SERVER_API_ENDPOINT
+```
+
+You can add `http://localhost:3001/` as your NEXT_PUBLIC_SERVER_API endpoint.
+
+### Boat
+
+Please read our DOCUMENTATION.md file to configure the Boat package
+
+## Start the project
+
+After all the configurations, Install Package dependency by running below command at the root directory `TripFinder` to get started with the project,
+
+```
+yarn
+```
+
+For starting **development server** run the below command at the root directory
+For hotel you need to run,
+
+```
+yarn start:hotel
+```
+
+For hotel-next you need to run,
+
+```
+yarn start:hotel-next
+```
+
+For boat you need to run,
+
+```
+yarn start:boat
+```
+
+For starting **production server** run the below command at the root directory
+For hotel you need to run,
+
+```
+yarn build:hotel
+```
+
+For hotel-next you need to run,
+
+```
+yarn build:hotel-next
+```
+
+For boat you need to run,
+
+```
+yarn build:boat
+```
