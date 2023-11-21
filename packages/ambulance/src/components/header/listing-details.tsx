@@ -29,7 +29,7 @@ export default function ListingDetailsHeader() {
           <SideNavButton className="!block" />
           <Logo className="!text-gray-dark" />
         </div>
-        <Searchbox className="hidden lg:block" />
+        {/* <Searchbox className="hidden lg:block" />
         <div className="flex items-center justify-end gap-5">
           <SearchIconBtn />
           {mounted ? (
@@ -47,7 +47,7 @@ export default function ListingDetailsHeader() {
               )}
             </>
           ) : null}
-        </div>
+        </div> */}
       </div>
     </header>
   );

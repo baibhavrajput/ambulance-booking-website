@@ -5,35 +5,27 @@ import { InstructionIconFour } from '@/components/icons/instruction/instruction-
 
 export const instructions = [
   {
-    title: 'Find the perfect boat',
+    title: 'Lorem Ipsum Dolor Sit',
     description:
-      'Browse our 5,000 designer dresses and accessories online or at our Melbourne warehouse.',
-    icon: (
-      <InstructionIconOne />
-    ),
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    icon: <InstructionIconOne />,
   },
   {
-    title: 'Select a captain',
+    title: 'Lorem Ipsum Dolor Sit',
     description:
-      'Find your perfect look among thousands of fashion pieces, here available for rent and purchase',
-    icon: (
-      <InstructionIconTwo />
-    ),
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    icon: <InstructionIconTwo />,
   },
   {
-    title: 'Many Pickup Locations',
+    title: 'Lorem Ipsum Dolor Sit',
     description:
-      'Enjoy wearing it at your special event for a few days, or purchase it to make it part of your wardrobe',
-    icon: (
-      <InstructionIconThree />
-    ),
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    icon: <InstructionIconThree />,
   },
   {
-    title: 'Satisfied Customers',
+    title: 'Lorem Ipsum Dolor Sit',
     description:
-      'Simply pop your dress back in the free prepaid satchel provided. We now handle all the dry cleaning.',
-    icon: (
-      <InstructionIconFour />
-    ),
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    icon: <InstructionIconFour />,
   },
 ];

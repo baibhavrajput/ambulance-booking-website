@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { format, addDays } from 'date-fns';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { makeQueryString } from '@/utils/makeQueryString';
 import DatePickerInput from '@/components/home/search-form/daterange-picker';
 import LocationInput from '@/components/home/search-form/location-input';
@@ -13,8 +13,8 @@ import Text from '@/components/ui/typography/text';
 import Button from '@/components/ui/button';
 import { Routes } from '@/config/routes';
 import { DualSwitchButton } from '@/components/ui/dual-switch-button';
-import BookingForm from './booking-form';
-import PricingForm from './pricing-form';
+import Input from '@/components/ui/form-fields/input';
+import { useQueryParam } from '@/hooks/use-query-param';
 
 type QueryStringType = {
   location?: string;
@@ -22,8 +22,11 @@ type QueryStringType = {
   returnDate: string;
 };
 
-export default function FindTripForm() {
+export default function BookingForm() {
   const router = useRouter();
+  const { clearFilter, updateQueryparams } = useQueryParam();
+  const searchParams = useSearchParams();
+  //   const location = searchParams?.get('location');
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [searchBox, setSearchBox] = useState<any>();
@@ -31,7 +34,7 @@ export default function FindTripForm() {
     searchedLocation: '',
     searchedPlaceAPIData: [],
   });
-  const [formType, setFormType] = useState('booking');
+  const [mobileNumberInput, setMobileNumberInput] = useState('');
 
   const onLoad = (ref: any) => setSearchBox(ref);
   const onPlacesChanged = () => {
@@ -42,45 +45,26 @@ export default function FindTripForm() {
     });
   };
 
-  const handleFormSubmit = (e: any) => {
-    e.preventDefault();
-    let queryString = '';
-    const queryObj: QueryStringType = {
-      location: locationInput.searchedLocation,
-      departureDate: format(startDate, 'yyyy-MM-dd'),
-      returnDate: format(endDate, 'yyyy-MM-dd'),
-    };
-    queryString = makeQueryString(queryObj);
-    // router.push(`${Routes.public.explore}?${queryString}`);
-  };
+  // removes value when reset
+  //   useEffect(() => {
+  //     if (!location) {
+  //       setLocationInput({
+  //         ...locationInput,
+  //         searchedLocation: '',
+  //       });
+  //     }
+  //     // eslint-disable-next-line react-hooks/exhaustive-deps
+  //   }, [location]);
+
+  function handleClearClick() {
+    setLocationInput({
+      ...locationInput,
+      searchedLocation: '',
+    });
+  }
 
   return (
-    <form
-      noValidate
-      onSubmit={handleFormSubmit}
-      className="relative z-[2] w-full max-w-[450px] rounded-lg bg-white p-6 shadow-2xl sm:m-0 sm:max-w-[380px] sm:p-7 sm:pt-9 md:max-w-[400px] md:shadow-none lg:rounded-xl xl:max-w-[460px] xl:p-9 4xl:max-w-[516px] 4xl:p-12"
-    >
-      <div className="mb-3 sm:mb-0">
-        <span className="font-primary mb-1 hidden text-xl leading-7 text-red sm:block 4xl:text-[28px] 4xl:leading-[44px]">
-          For emergency booking:
-        </span>
-        <Text
-          tag="h1"
-          className="leading-12 mb-4 !text-xl !font-black uppercase text-red sm:!text-[28px] sm:!leading-9  4xl:!text-4xl 4xl:!leading-[52px]"
-        >
-          Call 8102030413
-        </Text>
-        <Text className="mb-2 hidden leading-6 !text-secondary sm:block 3xl:leading-8 4xl:mb-6 4xl:text-lg">
-          For future bookings and queries, fill the below form:
-        </Text>
-      </div>
-      <DualSwitchButton
-        state={formType}
-        onClick={(value) => setFormType(value)}
-      />
-      {formType === 'booking' && <BookingForm />}
-      {formType === 'pricing' && <PricingForm />}
-
+    <>
       {/* <SearchAutocomplete
         onLoad={onLoad}
         onPlacesChanged={onPlacesChanged}
@@ -94,7 +78,7 @@ export default function FindTripForm() {
         }
       >
         <LocationInput
-          label="Location"
+          label="Destination"
           icon={<MapMarkerIcon className="h-6 w-6 text-gray" />}
           className="mb-3"
           value={locationInput.searchedLocation || ''}
@@ -105,19 +89,48 @@ export default function FindTripForm() {
             })
           }
         />
-      </SearchAutocomplete>
-      <LocationInput
-        label="Mobile number"
-        icon={<MapMarkerIcon className="h-6 w-6 text-gray" />}
-        className="mb-3"
-        value={locationInput.searchedLocation || ''}
-        onChange={(event) =>
-          setLocationInput({
-            ...locationInput,
-            searchedLocation: event.target.value,
-          })
-        }
-      />
+      </SearchAutocomplete> */}
+      {/* <SearchAutocomplete onLoad={onLoad} onPlacesChanged={onPlacesChanged}> */}
+      <div className="mb-4">
+        <Input
+          type="text"
+          inputClassName="mb-2 !text-sm !pl-12"
+          labelClassName="mb-2 lg:!text-base !mb-2 text-gray-dark"
+          startIcon={<MapMarkerIcon className="h-5 w-5" />}
+          startIconClassName="!left-1"
+          placeholder="Select destination"
+          required
+          clearable={locationInput.searchedLocation ? true : false}
+          endIcon={true}
+          onClearClick={handleClearClick}
+          value={locationInput.searchedLocation || ''}
+          onChange={(event: any) => {
+            setLocationInput({
+              ...locationInput,
+              searchedLocation: event.target.value,
+            });
+          }}
+        />
+      </div>
+      {/* </SearchAutocomplete> */}
+      <div className="mb-4">
+        <Input
+          type="text"
+          inputClassName="mb-2 !text-sm !pl-12"
+          labelClassName="lg:!text-base !mb-2 text-gray-dark"
+          startIcon={<MapMarkerIcon className="h-5 w-5" />}
+          startIconClassName="!left-1"
+          placeholder="Mobile number"
+          required
+          clearable={mobileNumberInput ? true : false}
+          endIcon={true}
+          onClearClick={() => setMobileNumberInput('')}
+          value={mobileNumberInput || ''}
+          onChange={(event: any) => {
+            setMobileNumberInput(event.target.value);
+          }}
+        />
+      </div>
       <DatePickerInput
         label="Departure"
         selected={startDate}
@@ -130,7 +143,7 @@ export default function FindTripForm() {
         minDate={new Date()}
         containerClass="mb-3"
         popperClassName="homepage-datepicker"
-      /> */}
+      />
       {/* <DatePickerInput
         label="Return"
         selected={endDate}
@@ -141,14 +154,6 @@ export default function FindTripForm() {
         containerClass="mb-3"
         popperClassName="homepage-datepicker"
       /> */}
-      <Button
-        type="submit"
-        className="w-full !py-[14px] text-sm !font-bold uppercase leading-6 md:!py-[17px] md:text-base lg:!rounded-xl 3xl:!py-[22px]"
-        rounded="lg"
-        size="xl"
-      >
-        Submit
-      </Button>
-    </form>
+    </>
   );
 }

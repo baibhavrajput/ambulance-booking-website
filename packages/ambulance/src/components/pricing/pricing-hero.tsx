@@ -30,7 +30,7 @@ export default function PricingHero({
           )}
           onClick={() => onClick('monthly')}
         >
-          Monthly Plan
+          One-way
         </Button>
         <Button
           size="lg"
@@ -42,7 +42,46 @@ export default function PricingHero({
           )}
           onClick={() => onClick('annually')}
         >
-          Annually Plan
+          Round-trip
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+export function SwitchButtonComponent({
+  state,
+  onClick,
+}: {
+  state: string;
+  onClick: (key: string) => void;
+}) {
+  return (
+    <div className="text-center">
+      <div className="inline-block rounded-md bg-[#F2F4F7] p-1">
+        <Button
+          size="lg"
+          className={clsx(
+            'focus:!ring-0 2xl:!p-[11px_26px]',
+            state === 'monthly'
+              ? 'bg-gray-dark text-white'
+              : '!bg-transparent !text-gray-dark'
+          )}
+          onClick={() => onClick('monthly')}
+        >
+          Booking
+        </Button>
+        <Button
+          size="lg"
+          className={clsx(
+            'focus:!ring-0 2xl:!p-[11px_26px]',
+            state === 'annually'
+              ? 'bg-gray-dark text-white'
+              : '!bg-transparent !text-gray-dark'
+          )}
+          onClick={() => onClick('annually')}
+        >
+          Pricing
         </Button>
       </div>
     </div>

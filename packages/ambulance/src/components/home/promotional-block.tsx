@@ -17,10 +17,10 @@ export default function PromotionalBlock() {
       descriptionClassName="text-sm text-center md:text-left"
     >
       <Link
-        href={Routes.public.explore}
+        href={Routes.public.pricing}
         className="m-auto inline-block rounded-lg bg-white px-9 py-3 text-sm font-semibold text-gray-dark transition duration-150 hover:bg-gray-dark hover:!text-white md:ml-0 md:text-base"
       >
-        View Boats
+        View Pricing
       </Link>
     </BannerBlock>
   );

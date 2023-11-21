@@ -21,6 +21,10 @@ const menuItems = [
     label: 'Help',
     path: Routes.public.help,
   },
+  {
+    label: 'About',
+    path: Routes.public.help,
+  },
 ];
 
 export default function Footer({ className }: { className?: string }) {
@@ -32,12 +36,12 @@ export default function Footer({ className }: { className?: string }) {
             <p className="text-center text-sm font-normal capitalize leading-6 text-gray-dark md:text-left 3xl:text-base">
               Copyright &copy; {new Date().getFullYear()}{' '}
               <a
-                href="https://redq.io/"
+                // href="https://redq.io/"
                 rel="noreferrer noopener"
                 target="_blank"
                 className="font-semibold hover:underline"
               >
-                RedQ Inc.
+                Baibhav.
               </a>{' '}
               All rights reserved
             </p>

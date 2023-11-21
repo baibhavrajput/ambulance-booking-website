@@ -23,11 +23,11 @@ const menu = [
     icon: <HomeIcon className="h-auto w-5" />,
     path: Routes.public.home,
   },
-  {
-    name: 'explore',
-    icon: <MagnifyingGlassIcon className="h-auto w-5" />,
-    path: Routes.public.explore,
-  },
+  // {
+  //   name: 'explore',
+  //   icon: <MagnifyingGlassIcon className="h-auto w-5" />,
+  //   path: Routes.public.explore,
+  // },
   {
     name: 'pricing',
     icon: <CubeIcon className="h-auto w-5" />,

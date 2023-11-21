@@ -19,7 +19,7 @@ const satisfy = Satisfy({
 });
 
 export const metadata: Metadata = {
-  title: 'Boat Rental',
+  title: 'Care Ambulance',
   description: 'Find your boat with the best experience.',
   icons: ['/images/logo.svg'],
   viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },

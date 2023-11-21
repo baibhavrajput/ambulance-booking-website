@@ -34,15 +34,16 @@ export default function NewBoats() {
   const { state } = useTimeout();
 
   return (
-    <Section
-      className="container-fluid mt-12 overflow-hidden lg:mt-16"
-      title="New boat rentals"
-      description="Unsatiable it considered invitation he traveling insensible."
-      headerClassName="items-end mb-4 lg:mb-5 xl:mb-6 gap-5"
-      rightElement={<SeeMore />}
-    >
-      {!state && <ListingCardLoader />}
-      {state && <NewBoatsGrid />}
-    </Section>
+    <></>
+    // <Section
+    //   className="container-fluid mt-12 overflow-hidden lg:mt-16"
+    //   title="New boat rentals"
+    //   description="Unsatiable it considered invitation he traveling insensible."
+    //   headerClassName="items-end mb-4 lg:mb-5 xl:mb-6 gap-5"
+    //   rightElement={<SeeMore />}
+    // >
+    //   {!state && <ListingCardLoader />}
+    //   {state && <NewBoatsGrid />}
+    // </Section>
   );
 }

@@ -7,7 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Manufacturer from '@/components/explore/manufacturer';
 import LocationInputFilter from '@/components/explore/location-input-filter';
 import FreeCancellation from '@/components/explore/free-cancellation-filter';
-import BoatTypeFilter from '@/components/explore/boat-type-filter';
+import AmbulanceTypeFilter from '@/components/explore/boat-type-filter';
 import WithCrewFilter from '@/components/explore/with-crew-filter';
 import TripdateFilter from '@/components/explore/tripdate-filter';
 import CategoryFilter from '@/components/explore/category-filter';
@@ -74,7 +74,7 @@ export default function Filter({ className }: FilterTypes) {
       <div className="grid grid-cols-1 gap-8 px-5 pb-3 md:px-7 xl:p-0 xl:pb-0">
         <LocationInputFilter />
         <TripdateFilter />
-        <BoatTypeFilter />
+        <AmbulanceTypeFilter />
         <CategoryFilter />
         <DistanceFilter />
         <Manufacturer />

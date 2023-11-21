@@ -14,11 +14,11 @@ const menuItems = [
     label: 'Home',
     path: Routes.public.home,
   },
-  {
-    id: 2,
-    label: 'Explore',
-    path: Routes.public.explore,
-  },
+  // {
+  //   id: 2,
+  //   label: 'Explore',
+  //   path: Routes.public.explore,
+  // },
   {
     id: 3,
     label: 'Pricing',
@@ -27,6 +27,11 @@ const menuItems = [
   {
     id: 4,
     label: 'Help',
+    path: Routes.public.help,
+  },
+  {
+    id: 5,
+    label: 'About',
     path: Routes.public.help,
   },
 ];
@@ -47,7 +52,7 @@ export default function Menu() {
           </li>
         ))}
       </ul>
-      {mounted ? (
+      {/* {mounted ? (
         <>
           {isAuthorized ? (
             <div className="ml-7 flex justify-end">
@@ -62,7 +67,7 @@ export default function Menu() {
             </Button>
           )}
         </>
-      ) : null}
+      ) : null} */}
     </nav>
   );
 }

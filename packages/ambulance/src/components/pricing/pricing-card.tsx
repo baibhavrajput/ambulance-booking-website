@@ -35,7 +35,7 @@ export default function PricingCard({ pricingData }: PricingCardProps) {
       <div>
         <h2 className="text-3xl font-bold leading-[-2px] text-gray-dark lg:text-[40px]">
           $ {pricingData.price}
-          <span className="text-2xl font-normal">/month</span>{' '}
+          <span className="text-2xl font-normal">/km</span>{' '}
         </h2>
         <h3 className="mt-4 text-2xl font-bold capitalize text-gray-dark lg:mt-6 lg:text-3xl">
           {pricingData.title}
@@ -47,7 +47,7 @@ export default function PricingCard({ pricingData }: PricingCardProps) {
           size="xl"
           className="mt-7 w-full !text-sm !font-bold capitalize lg:mt-9 lg:!text-base lg:!leading-[26px]"
         >
-          get started
+          Select
         </Button>
       </div>
       <ul className="mt-8 lg:mt-6">

@@ -12,25 +12,22 @@ import SelectBox from '@/components/ui/select-box';
 
 const options = [
   {
-    label: 'Choose ambulance type',
+    label: 'Choose payment mode',
     icon: <SailBoatIcon className="h-auto w-5" />,
     disabled: true,
-    amount: 0,
   },
   {
-    label: 'Eeco - Rs. 999',
+    label: 'Cash',
     icon: <HouseBoatIcon className="h-auto w-5" />,
-    amount: 999,
   },
   {
-    label: 'Winger- Rs. 1999',
+    label: 'Mediclaim',
     icon: <MotorBoatIcon className="h-auto w-5" />,
-    amount: 1999,
   },
-  // {
-  //   label: 'Bass boat',
-  //   icon: <JetskiBoatIcon className="h-auto w-5" />,
-  // },
+  {
+    label: 'Referred',
+    icon: <JetskiBoatIcon className="h-auto w-5" />,
+  },
   // {
   //   label: 'Cabin cruiser',
   //   icon: <RibBoatIcon className="h-auto w-5" />,
@@ -41,11 +38,7 @@ const options = [
   // },
 ];
 
-export default function AmbulanceTypeFilter({
-  onAmbulanceFilterChange,
-}: {
-  onAmbulanceFilterChange: (key: number) => void;
-}) {
+export default function PaymentModeTypeFilter() {
   const searchParams = useSearchParams();
   const boatType = searchParams?.get('boatType');
   const { clearFilter, updateQueryparams } = useQueryParam();
@@ -75,12 +68,10 @@ export default function AmbulanceTypeFilter({
   return (
     <SelectBox
       value={selected}
-      label="Select Ambulance Type"
+      label="Select Payment Mode"
       options={options}
       optionIcon={true}
-      onChange={(data: any) => {
-        setSelected(data), onAmbulanceFilterChange(data.amount);
-      }}
+      onChange={(data: any) => setSelected(data)}
       labelClassName="!text-sm lg:!text-base"
       buttonClassName="mb-4 h-10 lg:h-11 2xl:h-12"
       arrowIconClassName="right-3"

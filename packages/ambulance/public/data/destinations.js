@@ -1,51 +1,51 @@
 export const destinations = [
   {
-    name: "Miami",
+    name: "Ambulance 1",
     slug: "/explore?location=Miami",
-    location: "Long Island city",
-    thumbnail: "/images/destinations/miami.png"
+    location: "Lorem Ipsum Dolor Sit Amet",
+    thumbnail: "/images/destinations/ambulance_1.jpg"
   },
   {
-    name: "Seattle Beach",
+    name: "Ambulance 2",
     slug: "/explore?location=Long-Island",
-    location: "Long Island city",
-    thumbnail: "/images/destinations/longIsland.png"
+    location: "Lorem Ipsum Dolor Sit Amet",
+    thumbnail: "/images/destinations/ambulance_2.webp"
   },
   {
-    name: "Atlantis Dubai",
+    name: "Ambulance 3",
     slug: "/explore?location=Dubai",
-    location: "Long Island city",
-    thumbnail: "/images/destinations/dubai.png"
+    location: "Lorem Ipsum Dolor Sit Amet",
+    thumbnail: "/images/destinations/ambulance_3.jpg"
   },
   {
-    name: "Australian Beach",
+    name: "Ambulance 4",
     slug: "/explore?location=Australia",
-    location: "Long Island city",
-    thumbnail: "/images/destinations/australia.png"
+    location: "Lorem Ipsum Dolor Sit Amet",
+    thumbnail: "/images/destinations/ambulance_4.jpg"
   },
   {
-    name: "Bol Croatia",
+    name: "Ambulance 5",
     slug: "/explore?location=croatia",
-    location: "Long Island city",
-    thumbnail: "/images/destinations/croatia.jpg"
+    location: "Lorem Ipsum Dolor Sit Amet",
+    thumbnail: "/images/destinations/ambulance_1.webp"
   },
   {
-    name: "Atoll Maldives",
+    name: "Ambulance 6",
     slug: "/explore?location=maldive",
-    location: "Long Island city",
-    thumbnail: "/images/destinations/maldive.jpg"
+    location: "Lorem Ipsum Dolor Sit Amet",
+    thumbnail: "/images/destinations/ambulance_1.webp"
   },
   {
-    name: "Kijal Malaysia",
+    name: "Ambulance 7",
     slug: "/explore?location=malaysia",
-    location: "Long Island city",
-    thumbnail: "/images/destinations/malaysia.jpg"
+    location: "Lorem Ipsum Dolor Sit Amet",
+    thumbnail: "/images/destinations/ambulance_1.webp"
   },
   {
-    name: "Dalmatia Croatia",
+    name: "Ambulance 8",
     slug: "/explore?location=croatia",
-    location: "Long Island city",
-    thumbnail: "/images/destinations/dalmatia.jpg"
+    location: "Lorem Ipsum Dolor Sit Amet",
+    thumbnail: "/images/destinations/ambulance_1.webp"
   }
 ]
   
