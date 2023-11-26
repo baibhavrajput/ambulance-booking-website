@@ -19,12 +19,12 @@ export default function CheckboxGroupDual({
   onChange,
 }: CheckboxPropsType) {
   return (
-    <div>
+    <>
       {label && (
         <Text
           tag="span"
           className={clsx(
-            'block text-base font-bold capitalize text-gray-dark',
+            'block text-base font-bold capitalize text-gray-dark mb-2',
             labelClassName
           )}
         >
@@ -50,6 +50,6 @@ export default function CheckboxGroupDual({
           />
         ))}
       </div>
-    </div>
+    </>
   );
 }

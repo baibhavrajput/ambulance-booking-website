@@ -41,9 +41,9 @@ export default function Footer({ className }: { className?: string }) {
                 target="_blank"
                 className="font-semibold hover:underline"
               >
-                Baibhav.
+                Baibhav Rajput
               </a>{' '}
-              All rights reserved
+              . All rights reserved
             </p>
           </div>
           <nav className="order-1 border-b border-gray-lighter pb-4 md:order-none md:border-b-0 md:pb-0">

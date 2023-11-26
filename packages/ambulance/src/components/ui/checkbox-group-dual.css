@@ -1,5 +1,7 @@
 .checkbox-dual-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 100px;
+    column-gap: 5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
