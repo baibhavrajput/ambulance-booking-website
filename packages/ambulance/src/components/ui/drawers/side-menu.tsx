@@ -48,7 +48,7 @@ const menu = [
   {
     name: 'about',
     icon: <PencilSquareIcon className="h-auto w-5" />,
-    path: Routes.private.accountSettings,
+    path: Routes.public.help,
   },
 ];
 
