@@ -11,6 +11,7 @@ import Button from '@/components/ui/button';
 import Logo from '@/components/ui/logo';
 import useAuth from '@/hooks/use-auth';
 import { useIsMounted } from '@/hooks/use-is-mounted';
+import Menu from './menu';
 
 export default function Header() {
   const mounted = useIsMounted();
@@ -48,6 +49,10 @@ export default function Header() {
             </>
           ) : null} */}
         {/* </div> */}
+        <div className="flex items-center">
+          {/* <SearchIconBtn className="md:hidden" /> */}
+          <Menu />
+        </div>
       </div>
     </header>
   );

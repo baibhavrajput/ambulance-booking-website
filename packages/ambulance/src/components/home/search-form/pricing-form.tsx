@@ -17,6 +17,7 @@ import AmbulanceTypeFilter from '@/components/explore/boat-type-filter';
 import PaymentModeTypeFilter from '@/components/explore/payment-mode-filter';
 import AmenitiesFilter from '@/components/explore/aminites-filter';
 import Input from '@/components/ui/form-fields/input';
+import { MobileNumberIcon } from '@/components/icons/mobile-number';
 
 type QueryStringType = {
   location?: string;
@@ -138,7 +139,7 @@ export default function PricingForm() {
           type="text"
           inputClassName="mb-2 !text-sm !pl-12"
           labelClassName="lg:!text-base !mb-2 text-gray-dark"
-          startIcon={<MapMarkerIcon className="h-5 w-5" />}
+          startIcon={<MobileNumberIcon className="h-5 w-5" />}
           startIconClassName="!left-1"
           placeholder="Mobile number"
           required
@@ -154,14 +155,14 @@ export default function PricingForm() {
       <AmbulanceTypeFilter onAmbulanceFilterChange={onAmbulanceFilterChange} />
       <PaymentModeTypeFilter />
       <AmenitiesFilter onAmenitiesFilterChange={onAmenitiesFilterChange} />
-      <ul className="mt-4 mb-4 xl:mt-5">
+      {/* <ul className="mt-4 mb-4 xl:mt-5">
         <li className="flex items-center justify-between py-1.5 text-base capitalize text-gray-dark first:pt-0 last:border-t last:border-gray-lighter last:pb-0">
           <span className="font-normal">{'Total'}</span>
           <span className="font-bold">
             Rs. {ambulanceCharge + amenitiesCharge}
           </span>
         </li>
-      </ul>
+      </ul> */}
     </>
   );
 }

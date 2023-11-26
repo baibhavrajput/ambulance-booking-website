@@ -9,6 +9,8 @@ import {
   UserCircleIcon,
   HeartIcon,
   Bars3CenterLeftIcon,
+  CubeIcon,
+  CurrencyRupeeIcon,
 } from '@heroicons/react/24/outline';
 import { Routes } from '@/config/routes';
 import { MobileMenuSearchIcon } from '@/components/icons/mobile-menu-search';
@@ -22,13 +24,18 @@ export default function MobileNav() {
   const { openModal } = useModal();
   const [drawerSate, setDrawerState] = useAtom(drawerStateAtom);
   return (
-    <div className="sticky inset-x-0 bottom-0 z-30 grid h-16 w-full grid-cols-5 items-center justify-center gap-2 bg-white shadow-menu-shadow md:hidden">
+    <div className="sticky inset-x-0 bottom-0 z-30 grid h-16 w-full grid-cols-2 items-center justify-center gap-2 bg-white shadow-menu-shadow md:hidden">
       <div className="flex items-center justify-center">
         <Link href={Routes.public.home} className="inline-block hover:text-red">
           <HomeIcon className="h-6 w-6" />
         </Link>
       </div>
       <div className="flex items-center justify-center">
+        <Link href={Routes.public.pricing} className="inline-block hover:text-red">
+          <CurrencyRupeeIcon className="h-7 w-7" />
+        </Link>
+      </div>
+      {/* <div className="flex items-center justify-center">
         <Link
           href={Routes.public.explore}
           className="inline-block hover:text-red"
@@ -55,8 +62,8 @@ export default function MobileNav() {
         >
           <HeartIcon className="h-6 w-6" />
         </Link>
-      </div>
-      <div className="flex items-center justify-center">
+      </div> */}
+      {/* <div className="flex items-center justify-center">
         <ActionIcon
           variant="text"
           className="inline-block hover:text-red focus:!ring-0"
@@ -71,7 +78,7 @@ export default function MobileNav() {
         >
           <Bars3CenterLeftIcon className="h-6 w-6 rotate-180" />
         </ActionIcon>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -9,24 +9,25 @@ import { HouseBoatIcon } from '@/components/icons/boat-types/house-boat';
 import { RibBoatIcon } from '@/components/icons/boat-types/rib-boat';
 import { SailBoatIcon } from '@/components/icons/sail-boat';
 import SelectBox from '@/components/ui/select-box';
+import { PaymentModeIcon } from '../icons/payment-mode-icon';
 
 const options = [
   {
     label: 'Choose payment mode',
-    icon: <SailBoatIcon className="h-auto w-5" />,
+    icon: <PaymentModeIcon className="h-auto w-5" />,
     disabled: true,
   },
   {
     label: 'Cash',
-    icon: <HouseBoatIcon className="h-auto w-5" />,
+    icon: <PaymentModeIcon className="h-auto w-5" />,
   },
   {
     label: 'Mediclaim',
-    icon: <MotorBoatIcon className="h-auto w-5" />,
+    icon: <PaymentModeIcon className="h-auto w-5" />,
   },
   {
     label: 'Referred',
-    icon: <JetskiBoatIcon className="h-auto w-5" />,
+    icon: <PaymentModeIcon className="h-auto w-5" />,
   },
   // {
   //   label: 'Cabin cruiser',

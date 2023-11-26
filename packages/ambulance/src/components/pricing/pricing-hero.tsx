@@ -12,7 +12,7 @@ export default function PricingHero({
   onClick: (key: string) => void;
 }) {
   return (
-    <div className="mt-8 text-center   lg:mt-20 2xl:mt-24">
+    <div className="mt-20 pt-8 text-center   lg:mt-20 2xl:mt-24">
       <Text tag="h1" className="text-[28px] font-bold leading-10">
         Select your pricing plan
       </Text>

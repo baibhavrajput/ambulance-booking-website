@@ -11,11 +11,13 @@ import {
   InformationCircleIcon,
   CubeIcon,
   XMarkIcon,
+  PencilSquareIcon,
 } from '@heroicons/react/24/outline';
 import { drawerStateAtom } from '@/components/drawers/view';
 import ActionIcon from '@/components/ui/action-icon';
 import { Routes } from '@/config/routes';
 import Logo from '@/components/ui/logo';
+import { PencilIcon } from '@heroicons/react/24/solid';
 
 const menu = [
   {
@@ -33,15 +35,20 @@ const menu = [
     icon: <CubeIcon className="h-auto w-5" />,
     path: Routes.public.pricing,
   },
-  {
-    name: 'settings',
-    icon: <Cog6ToothIcon className="h-auto w-5" />,
-    path: Routes.private.accountSettings,
-  },
+  // {
+  //   name: 'settings',
+  //   icon: <Cog6ToothIcon className="h-auto w-5" />,
+  //   path: Routes.private.accountSettings,
+  // },
   {
     name: 'help',
     icon: <InformationCircleIcon className="h-auto w-5" />,
     path: Routes.public.help,
+  },
+  {
+    name: 'about',
+    icon: <PencilSquareIcon className="h-auto w-5" />,
+    path: Routes.private.accountSettings,
   },
 ];
 
@@ -83,7 +90,7 @@ function List({ navListItem }: navListTypes) {
 export default function SideMenu() {
   const [drawerSate, setDrawerState] = useAtom(drawerStateAtom);
   return (
-    <div className="ml-auto h-full bg-white md:ml-0">
+    <div className="h-full bg-white md:ml-0 w-80">
       <div className="flex h-14 items-center justify-between px-10 pt-6 md:h-20 xl:h-24">
         <Logo className="!text-gray-dark" />
         <ActionIcon

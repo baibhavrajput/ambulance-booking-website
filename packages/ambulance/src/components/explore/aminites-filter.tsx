@@ -2,14 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import { useQueryParam } from '@/hooks/use-query-param';
-import CheckboxGroup from '@/components/ui/checkbox-group';
 import { useSearchParams } from 'next/navigation';
+import CheckboxGroupDual from '../ui/checkbox-group-dual';
 
 const categories = [
-  { id: 'cat-1', label: 'AC - Rs. 99', checked: false, amount: 99 },
-  { id: 'cat-2', label: 'Oxygen - Rs. 199', checked: false, amount: 199 },
-  { id: 'cat-3', label: 'Technician - Rs. 299', checked: false, amount: 299 },
-  { id: 'cat-4', label: 'Ventilator - Rs. 399', checked: false, amount: 399 },
+  { id: 'cat-1', label: 'AC', checked: false, amount: 99 },
+  { id: 'cat-2', label: 'Oxygen', checked: false, amount: 199 },
+  { id: 'cat-3', label: 'Technician', checked: false, amount: 299 },
+  { id: 'cat-4', label: 'Ventilator', checked: false, amount: 399 },
   // { id: 'cat-5', label: 'Jet ski', checked: false },
   // { id: 'cat-6', label: 'Houseboat', checked: false },
 ];
@@ -73,7 +73,7 @@ export default function AmenitiesFilter({
   }, [manf]);
 
   return (
-    <CheckboxGroup
+    <CheckboxGroupDual
       label="Additional amenities"
       labelClassName="!text-sm lg:!text-base mb-4 lg:mb-2"
       data={selected}

@@ -9,28 +9,30 @@ import { HouseBoatIcon } from '@/components/icons/boat-types/house-boat';
 import { RibBoatIcon } from '@/components/icons/boat-types/rib-boat';
 import { SailBoatIcon } from '@/components/icons/sail-boat';
 import SelectBox from '@/components/ui/select-box';
+import { AmbulanceIcon } from '../icons/ambulance-icon';
 
 const options = [
   {
     label: 'Choose ambulance type',
-    icon: <SailBoatIcon className="h-auto w-5" />,
+    icon: <AmbulanceIcon className="h-auto w-5" />,
     disabled: true,
     amount: 0,
   },
   {
-    label: 'Eeco - Rs. 999',
-    icon: <HouseBoatIcon className="h-auto w-5" />,
+    label: 'Eeco',
+    icon: <AmbulanceIcon className="h-auto w-5" />,
     amount: 999,
   },
   {
-    label: 'Winger- Rs. 1999',
-    icon: <MotorBoatIcon className="h-auto w-5" />,
+    label: 'Winger',
+    icon: <AmbulanceIcon className="h-auto w-5" />,
     amount: 1999,
   },
-  // {
-  //   label: 'Bass boat',
-  //   icon: <JetskiBoatIcon className="h-auto w-5" />,
-  // },
+  {
+    label: 'Force',
+    icon: <AmbulanceIcon className="h-auto w-5" />,
+    amount: 2999,
+  },
   // {
   //   label: 'Cabin cruiser',
   //   icon: <RibBoatIcon className="h-auto w-5" />,

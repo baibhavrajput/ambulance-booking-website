@@ -74,7 +74,6 @@ export default function Filter({ className }: FilterTypes) {
       <div className="grid grid-cols-1 gap-8 px-5 pb-3 md:px-7 xl:p-0 xl:pb-0">
         <LocationInputFilter />
         <TripdateFilter />
-        <AmbulanceTypeFilter />
         <CategoryFilter />
         <DistanceFilter />
         <Manufacturer />

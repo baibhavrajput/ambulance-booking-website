@@ -58,7 +58,7 @@ export default function FindTripForm() {
     <form
       noValidate
       onSubmit={handleFormSubmit}
-      className="relative z-[2] w-full max-w-[450px] rounded-lg bg-white p-6 shadow-2xl sm:m-0 sm:max-w-[380px] sm:p-7 sm:pt-9 md:max-w-[400px] md:shadow-none lg:rounded-xl xl:max-w-[460px] xl:p-9 4xl:max-w-[516px] 4xl:p-12"
+      className="relative z-[2] w-full max-w-[450px] rounded-lg bg-white p-6 shadow-2xl sm:m-0 sm:max-w-[380px] sm:p-5 sm:pt-5 md:max-w-[400px] md:shadow-none lg:rounded-xl xl:max-w-[460px] xl:p-9 4xl:max-w-[516px] 4xl:p-12"
     >
       <div className="mb-3 sm:mb-0">
         <span className="font-primary mb-1 hidden text-xl leading-7 text-red sm:block 4xl:text-[28px] 4xl:leading-[44px]">
@@ -74,13 +74,13 @@ export default function FindTripForm() {
           For future bookings and queries, fill the below form:
         </Text>
       </div>
-      <DualSwitchButton
+      {/* <DualSwitchButton
         state={formType}
         onClick={(value) => setFormType(value)}
-      />
-      {formType === 'booking' && <BookingForm />}
-      {formType === 'pricing' && <PricingForm />}
-
+      /> */}
+      {/* {formType === 'booking' && <BookingForm />}
+      {formType === 'pricing' && <PricingForm />} */}
+      <PricingForm />
       {/* <SearchAutocomplete
         onLoad={onLoad}
         onPlacesChanged={onPlacesChanged}

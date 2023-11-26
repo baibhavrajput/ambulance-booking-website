@@ -36,7 +36,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "C:\\Users\\NAHID\\Desktop\\tripfinder\\packages\\boat\\.next/types/**/*.ts",
-    "/Users/idris/RedQTeam/RedQApp/tripfinder/packages/boat/.next/types/**/*.ts"
+    "/Users/idris/RedQTeam/RedQApp/tripfinder/packages/boat/.next/types/**/*.ts",
+    "build/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
