@@ -15,6 +15,7 @@ import { Routes } from '@/config/routes';
 import { DualSwitchButton } from '@/components/ui/dual-switch-button';
 import BookingForm from './booking-form';
 import PricingForm from './pricing-form';
+import axios from 'axios';
 
 type QueryStringType = {
   location?: string;
@@ -42,6 +43,36 @@ export default function FindTripForm() {
     });
   };
 
+  const apiKey =
+    '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';
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+  const day = currentDate.getDate().toString().padStart(2, '0');
+  const hours = currentDate.getHours().toString().padStart(2, '0');
+  const minutes =
+    currentDate.getMinutes() === 59
+      ? '00'
+      : (currentDate.getMinutes() + 1).toString().padStart(2, '0');
+  const seconds = currentDate.getSeconds().toString().padStart(2, '0');
+
+  const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}+05:30`;
+
+  const data = {
+    name: 'Test Email from We Care Ambulance',
+    subject: 'Test Email from We Care',
+    sender: {
+      name: 'Baibhav',
+      email: 'baibhavrajputt11@gmail.com',
+    },
+    type: 'classic',
+    htmlContent: 'Email check',
+    recipients: {
+      listIds: [2],
+    },
+    scheduledAt: formattedDateTime,
+  };
+
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
     let queryString = '';
@@ -51,12 +82,20 @@ export default function FindTripForm() {
       returnDate: format(endDate, 'yyyy-MM-dd'),
     };
     queryString = makeQueryString(queryObj);
+    axios.post('https://api.brevo.com/v3/emailCampaigns', data, {
+      headers: {
+        'api-key': apiKey,
+      },
+    });
+    console.log(formattedDateTime);
     // router.push(`${Routes.public.explore}?${queryString}`);
   };
 
   return (
     <form
       noValidate
+      action="https://formsubmit.co/el/locone"
+      method="POST"
       onSubmit={handleFormSubmit}
       className="relative z-[2] w-full max-w-[450px] rounded-lg bg-white p-6 shadow-2xl sm:m-0 sm:max-w-[380px] sm:p-5 sm:pt-5 md:max-w-[400px] md:shadow-none lg:rounded-xl xl:max-w-[460px] xl:p-9 4xl:max-w-[516px] 4xl:p-12"
     >
