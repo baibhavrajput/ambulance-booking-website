@@ -43,7 +43,7 @@ export default function FindTripForm() {
     });
   };
 
-  const apiKey = process.env.API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_BREVO_API_KEY;
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
