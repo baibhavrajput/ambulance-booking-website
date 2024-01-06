@@ -27,7 +27,6 @@
     "heroicons": "^2.0.13",
     "jotai": "^2.0.0",
     "next": "^13.2.3",
-    "nodemailer": "^6.9.8",
     "rc-pagination": "^3.3.0",
     "rc-rate": "^2.9.2",
     "rc-table": "^7.30.3",
