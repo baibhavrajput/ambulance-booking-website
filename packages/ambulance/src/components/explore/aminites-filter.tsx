@@ -28,15 +28,15 @@ export default function AmenitiesFilter(props: AmenitiesFilterProps) {
   };
 
   // if initial query
-  useEffect(() => {
-    let m = manf?.split(',');
-    const updatedItems = [...props.selectedAmenities];
-    updatedItems.map((elem) => {
-      if (m?.includes(elem.label)) elem.checked = true;
-    });
-    props.setSelectedAmenities(updatedItems);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   let m = manf?.split(',');
+  //   const updatedItems = [...props.selectedAmenities];
+  //   updatedItems.map((elem) => {
+  //     if (m?.includes(elem.label)) elem.checked = true;
+  //   });
+  //   props.setSelectedAmenities(updatedItems);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   // updates query
   // useEffect(() => {
@@ -49,14 +49,14 @@ export default function AmenitiesFilter(props: AmenitiesFilterProps) {
   // }, [selected]);
 
   // reset
-  useEffect(() => {
-    if (!manf) {
-      const updatedItems = [...props.selectedAmenities];
-      updatedItems.map((elem) => (elem.checked = false));
-      props.setSelectedAmenities(updatedItems);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [manf]);
+  // useEffect(() => {
+  //   if (!manf) {
+  //     const updatedItems = [...props.selectedAmenities];
+  //     updatedItems.map((elem) => (elem.checked = false));
+  //     props.setSelectedAmenities(updatedItems);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [manf]);
 
   return (
     <CheckboxGroupDual

@@ -122,21 +122,25 @@ export default function FindTripForm() {
 
   const postFormData = async (formData: any) => {
     try {
-      await axios.post('https://api.brevo.com/v3/emailCampaigns', formData, {
-        headers: {
-          'api-key': apiKey,
-        },
-      });
-      setLocationInput({
-        searchedLocation: '',
-        searchedPlaceAPIData: [],
-      });
-      setMobileNumberInput('');
-      setSelectedAmbulanceType(ambulanceTypes[0]);
-      setSelectedPaymentMode(paymentModes[0]);
-      setSelectedAmenities(amenities);
-      console.log(amenities);
-      setFormSubmissionStatus(true);
+      if (
+        selectedAmbulanceType.label !== ambulanceTypes[0].label &&
+        selectedPaymentMode.label !== paymentModes[0].label
+      ) {
+        await axios.post('https://api.brevo.com/v3/emailCampaigns', formData, {
+          headers: {
+            'api-key': apiKey,
+          },
+        });
+        setLocationInput({
+          searchedLocation: '',
+          searchedPlaceAPIData: [],
+        });
+        setMobileNumberInput('');
+        setSelectedAmbulanceType(ambulanceTypes[0]);
+        setSelectedPaymentMode(paymentModes[0]);
+        setSelectedAmenities(amenities);
+        setFormSubmissionStatus(true);
+      }
     } catch (error) {
       alert('Submission Failed.');
     }

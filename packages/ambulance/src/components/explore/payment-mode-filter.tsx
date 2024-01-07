@@ -34,17 +34,17 @@ export default function PaymentModeTypeFilter(
   // }, [selected]);
 
   // sets the state if in url
-  useEffect(() => {
-    if (boatType) {
-      const b: any = props.paymentModes.find(
-        (item: any) => item.label === boatType
-      );
-      props.setSelectedPaymentMode(b);
-    } else {
-      props.setSelectedPaymentMode(props.paymentModes[0]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [boatType]);
+  // useEffect(() => {
+  //   if (boatType) {
+  //     const b: any = props.paymentModes.find(
+  //       (item: any) => item.label === boatType
+  //     );
+  //     props.setSelectedPaymentMode(b);
+  //   } else {
+  //     props.setSelectedPaymentMode(props.paymentModes[0]);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [boatType]);
 
   return (
     <SelectBox
@@ -52,7 +52,10 @@ export default function PaymentModeTypeFilter(
       label="Select Payment Mode"
       options={props.paymentModes}
       optionIcon={true}
-      onChange={(data: any) => props.setSelectedPaymentMode(data)}
+      onChange={(data: any) => {
+        props.setSelectedPaymentMode(data);
+        props.setFormSubmissionStatus(false);
+      }}
       labelClassName="!text-sm lg:!text-base"
       buttonClassName="mb-4 h-10 lg:h-11 2xl:h-12"
       arrowIconClassName="right-3"
@@ -60,7 +63,6 @@ export default function PaymentModeTypeFilter(
       onClearClick={(e) => {
         e.stopPropagation();
         props.setSelectedPaymentMode(props.paymentModes[0]);
-        props.setFormSubmissionStatus(false);
       }}
     />
   );

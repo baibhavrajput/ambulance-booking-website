@@ -29,17 +29,17 @@ const AmbulanceTypeFilter = (props: AmbulanceTypeFilterProps) => {
   // }, [selected]);
 
   // sets the state if in url
-  useEffect(() => {
-    if (boatType) {
-      const b: any = [props.ambulanceTypes].find(
-        (item) => item.label === boatType
-      );
-      props.setSelectedAmbulanceType(b);
-    } else {
-      props.setSelectedAmbulanceType(props.ambulanceTypes[0]);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [boatType]);
+  // useEffect(() => {
+  //   if (boatType) {
+  //     const b: any = [props.ambulanceTypes].find(
+  //       (item) => item.label === boatType
+  //     );
+  //     props.setSelectedAmbulanceType(b);
+  //   } else {
+  //     props.setSelectedAmbulanceType(props.ambulanceTypes[0]);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [boatType]);
 
   return (
     <SelectBox
@@ -48,8 +48,9 @@ const AmbulanceTypeFilter = (props: AmbulanceTypeFilterProps) => {
       options={props.ambulanceTypes}
       optionIcon={true}
       onChange={(data: any) => {
-        props.setSelectedAmbulanceType(data),
-          props.onAmbulanceFilterChange(data.amount);
+        props.setSelectedAmbulanceType(data);
+        props.onAmbulanceFilterChange(data.amount);
+        props.setFormSubmissionStatus(false);
       }}
       labelClassName="!text-sm lg:!text-base"
       buttonClassName="mb-4 h-10 lg:h-11 2xl:h-12"
@@ -58,7 +59,6 @@ const AmbulanceTypeFilter = (props: AmbulanceTypeFilterProps) => {
       onClearClick={(e) => {
         e.stopPropagation();
         props.setSelectedAmbulanceType(props.selectedAmbulanceType[0]);
-        props.setFormSubmissionStatus(false);
       }}
     />
   );
