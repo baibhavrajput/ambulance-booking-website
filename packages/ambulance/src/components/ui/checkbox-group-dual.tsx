@@ -24,7 +24,7 @@ export default function CheckboxGroupDual({
         <Text
           tag="span"
           className={clsx(
-            'block text-base font-bold capitalize text-gray-dark mb-2',
+            'mb-2 block text-base font-bold capitalize text-gray-dark',
             labelClassName
           )}
         >
@@ -32,7 +32,7 @@ export default function CheckboxGroupDual({
         </Text>
       )}
 
-      <div className='checkbox-dual-container'>
+      <div className="checkbox-dual-container">
         {data.map((item) => (
           <Checkbox
             onChange={(e) => onChange(item)}

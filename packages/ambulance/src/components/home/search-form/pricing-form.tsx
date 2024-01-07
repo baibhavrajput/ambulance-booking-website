@@ -13,7 +13,7 @@ import Text from '@/components/ui/typography/text';
 import Button from '@/components/ui/button';
 import { Routes } from '@/config/routes';
 import { DualSwitchButton } from '@/components/ui/dual-switch-button';
-import AmbulanceTypeFilter from '@/components/explore/boat-type-filter';
+import AmbulanceTypeFilter from '@/components/explore/ambulance-type-filter';
 import PaymentModeTypeFilter from '@/components/explore/payment-mode-filter';
 import AmenitiesFilter from '@/components/explore/aminites-filter';
 import Input from '@/components/ui/form-fields/input';
@@ -25,42 +25,41 @@ type QueryStringType = {
   returnDate: string;
 };
 
-export default function PricingForm() {
+type PricingFormProps = {
+  locationInput: any;
+  setLocationInput: any;
+  mobileNumberInput: string;
+  setMobileNumberInput: any;
+  selectedAmbulanceType: any;
+  setSelectedAmbulanceType: any;
+  ambulanceTypes: any;
+  selectedPaymentMode: any;
+  setSelectedPaymentMode: any;
+  paymentModes: any;
+  selectedAmenities: any;
+  setSelectedAmenities: any;
+  amenities: any;
+  setFormSubmissionStatus: any;
+};
+
+export default function PricingForm(props: PricingFormProps) {
   const router = useRouter();
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
   const [searchBox, setSearchBox] = useState<any>();
-  const [mobileNumberInput, setMobileNumberInput] = useState('');
   const [ambulanceCharge, setAmbulanceCharge] = useState(0);
   const [amenitiesCharge, setAmenitiesCharge] = useState(0);
-  const [locationInput, setLocationInput] = useState({
-    searchedLocation: '',
-    searchedPlaceAPIData: [],
-  });
 
   const onLoad = (ref: any) => setSearchBox(ref);
   const onPlacesChanged = () => {
     const places = searchBox?.getPlaces();
-    setLocationInput({
+    props.setLocationInput({
       searchedLocation: places && places[0] && places[0].formatted_address,
       searchedPlaceAPIData: places ? places : [],
     });
   };
 
-  // removes value when reset
-  //   useEffect(() => {
-  //     if (!location) {
-  //       setLocationInput({
-  //         ...locationInput,
-  //         searchedLocation: '',
-  //       });
-  //     }
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //   }, [location]);
-
   function handleClearClick() {
-    setLocationInput({
-      ...locationInput,
+    props.setLocationInput({
+      ...props.locationInput,
       searchedLocation: '',
     });
   }
@@ -121,40 +120,58 @@ export default function PricingForm() {
           startIconClassName="!left-1"
           placeholder="Select destination"
           required
-          clearable={locationInput.searchedLocation ? true : false}
+          clearable={props.locationInput.searchedLocation ? true : false}
           endIcon={true}
           onClearClick={handleClearClick}
-          value={locationInput.searchedLocation || ''}
+          value={props.locationInput.searchedLocation || ''}
           onChange={(event: any) => {
-            setLocationInput({
-              ...locationInput,
+            props.setLocationInput({
+              ...props.locationInput,
               searchedLocation: event.target.value,
             });
+            props.setFormSubmissionStatus(false);
           }}
         />
       </div>
       {/* </SearchAutocomplete> */}
       <div className="mb-4">
         <Input
-          type="text"
+          type="number"
           inputClassName="mb-2 !text-sm !pl-12"
           labelClassName="lg:!text-base !mb-2 text-gray-dark"
           startIcon={<MobileNumberIcon className="h-5 w-5" />}
           startIconClassName="!left-1"
-          placeholder="Mobile number"
+          placeholder="Enter Valid 10 digit mobile number"
           required
-          clearable={mobileNumberInput ? true : false}
+          clearable={props.mobileNumberInput ? true : false}
           endIcon={true}
-          onClearClick={() => setMobileNumberInput('')}
-          value={mobileNumberInput || ''}
+          onClearClick={() => props.setMobileNumberInput('')}
+          value={props.mobileNumberInput || ''}
           onChange={(event: any) => {
-            setMobileNumberInput(event.target.value);
+            props.setMobileNumberInput(event.target.value);
+            props.setFormSubmissionStatus(false);
           }}
         />
       </div>
-      <AmbulanceTypeFilter onAmbulanceFilterChange={onAmbulanceFilterChange} />
-      <PaymentModeTypeFilter />
-      <AmenitiesFilter onAmenitiesFilterChange={onAmenitiesFilterChange} />
+      <AmbulanceTypeFilter
+        onAmbulanceFilterChange={onAmbulanceFilterChange}
+        selectedAmbulanceType={props.selectedAmbulanceType}
+        setSelectedAmbulanceType={props.setSelectedAmbulanceType}
+        ambulanceTypes={props.ambulanceTypes}
+        setFormSubmissionStatus={props.setFormSubmissionStatus}
+      />
+      <PaymentModeTypeFilter
+        selectedPaymentMode={props.selectedPaymentMode}
+        setSelectedPaymentMode={props.setSelectedPaymentMode}
+        paymentModes={props.paymentModes}
+        setFormSubmissionStatus={props.setFormSubmissionStatus}
+      />
+      <AmenitiesFilter
+        onAmenitiesFilterChange={onAmenitiesFilterChange}
+        selectedAmenities={props.selectedAmenities}
+        setSelectedAmenities={props.setSelectedAmenities}
+        setFormSubmissionStatus={props.setFormSubmissionStatus}
+      />
       {/* <ul className="mt-4 mb-4 xl:mt-5">
         <li className="flex items-center justify-between py-1.5 text-base capitalize text-gray-dark first:pt-0 last:border-t last:border-gray-lighter last:pb-0">
           <span className="font-normal">{'Total'}</span>

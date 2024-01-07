@@ -16,6 +16,7 @@ import { DualSwitchButton } from '@/components/ui/dual-switch-button';
 import BookingForm from './booking-form';
 import PricingForm from './pricing-form';
 import axios from 'axios';
+import { ambulanceTypes, amenities, paymentModes } from './utils';
 
 type QueryStringType = {
   location?: string;
@@ -23,15 +24,31 @@ type QueryStringType = {
   returnDate: string;
 };
 
+export interface ItemProps {
+  id: string;
+  label: string;
+  checked: boolean;
+  amount: number;
+}
+
 export default function FindTripForm() {
   const router = useRouter();
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
   const [searchBox, setSearchBox] = useState<any>();
   const [locationInput, setLocationInput] = useState({
     searchedLocation: '',
     searchedPlaceAPIData: [],
   });
+  const [mobileNumberInput, setMobileNumberInput] = useState('');
+  const [selectedAmbulanceType, setSelectedAmbulanceType] = useState(
+    ambulanceTypes[0]
+  );
+  const [selectedPaymentMode, setSelectedPaymentMode] = useState(
+    paymentModes[0]
+  );
+  const [selectedAmenities, setSelectedAmenities] =
+    useState<ItemProps[]>(amenities);
+  const [formSubmissionStatus, setFormSubmissionStatus] = useState(false);
+
   const [formType, setFormType] = useState('booking');
 
   const onLoad = (ref: any) => setSearchBox(ref);
@@ -44,82 +61,144 @@ export default function FindTripForm() {
   };
 
   const apiKey = process.env.NEXT_PUBLIC_BREVO_API_KEY;
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-  const day = currentDate.getDate().toString().padStart(2, '0');
-  const hours = currentDate.getHours().toString().padStart(2, '0');
-  const minutes =
-    currentDate.getMinutes() === 59
-      ? '00'
-      : (currentDate.getMinutes() + 1).toString().padStart(2, '0');
-  const seconds = currentDate.getSeconds().toString().padStart(2, '0');
 
-  const formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}+05:30`;
+  const getCurrentDate = () => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = currentDate.getDate().toString().padStart(2, '0');
 
-  const data = {
-    name: 'Test Email from We Care Ambulance',
-    subject: 'Test Email from We Care',
-    sender: {
-      name: 'Baibhav',
-      email: 'baibhavrajputt11@gmail.com',
-    },
-    type: 'classic',
-    htmlContent: 'Email check',
-    recipients: {
-      listIds: [2],
-    },
-    scheduledAt: formattedDateTime,
+    const formattedDateTime = `${year}-${month}-${day}`;
+    return formattedDateTime;
+  };
+
+  const getCurrentTime = () => {
+    const currentDate = new Date();
+    const hours = currentDate.getHours().toString().padStart(2, '0');
+    const minutes =
+      currentDate.getMinutes() === 59
+        ? '00'
+        : (currentDate.getMinutes() + 1).toString().padStart(2, '0');
+    const seconds = currentDate.getSeconds().toString().padStart(2, '0');
+
+    const formattedDateTime = `${hours}:${minutes}:${seconds}`;
+    return formattedDateTime;
+  };
+
+  const getFormData = () => {
+    const currentDate = getCurrentDate();
+    const currentTime = getCurrentTime();
+    let amenitiesRequired: string = '';
+    selectedAmenities.forEach((amenity: ItemProps) => {
+      if (amenity.checked)
+        amenitiesRequired = `${amenitiesRequired} ${amenity.label}`;
+    });
+    const data = {
+      name: 'We Care Ambulance',
+      subject: 'We Care Ambulance new form submission. ',
+      sender: {
+        name: 'We Care Ambulance',
+        email: 'baibhavrajputt11@gmail.com',
+      },
+      type: 'classic',
+      htmlContent: `<html>
+      <head></head>
+      <body>
+      <p>New query submitted on ${currentDate} at ${currentTime}+05:30.</p>
+      <p><br><b>Destination</b> : ${locationInput.searchedLocation}</br>
+      <br><b>Mobile</b> : ${mobileNumberInput}</br>
+      <br><b>Ambulance Type</b> : ${selectedAmbulanceType.label}</br>
+      <br><b>Payment Mode</b> : ${selectedPaymentMode.label}</br>
+      <br><b>Additional Amenities</b> : ${amenitiesRequired}</p>
+      </body>
+      </html>`,
+      recipients: {
+        listIds: [2],
+      },
+      scheduledAt: `${currentDate} ${currentTime}+05:30`,
+    };
+    return data;
+  };
+
+  const postFormData = async (formData: any) => {
+    try {
+      await axios.post('https://api.brevo.com/v3/emailCampaigns', formData, {
+        headers: {
+          'api-key': apiKey,
+        },
+      });
+      setLocationInput({
+        searchedLocation: '',
+        searchedPlaceAPIData: [],
+      });
+      setMobileNumberInput('');
+      setSelectedAmbulanceType(ambulanceTypes[0]);
+      setSelectedPaymentMode(paymentModes[0]);
+      setSelectedAmenities(amenities);
+      console.log(amenities);
+      setFormSubmissionStatus(true);
+    } catch (error) {
+      alert('Submission Failed.');
+    }
   };
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
-    let queryString = '';
-    const queryObj: QueryStringType = {
-      location: locationInput.searchedLocation,
-      departureDate: format(startDate, 'yyyy-MM-dd'),
-      returnDate: format(endDate, 'yyyy-MM-dd'),
-    };
-    queryString = makeQueryString(queryObj);
-    axios.post('https://api.brevo.com/v3/emailCampaigns', data, {
-      headers: {
-        'api-key': apiKey,
-      },
-    });
-    console.log(formattedDateTime);
-    // router.push(`${Routes.public.explore}?${queryString}`);
+    const formData = getFormData();
+    postFormData(formData);
   };
 
   return (
-    <form
-      noValidate
-      action="https://formsubmit.co/el/locone"
-      method="POST"
-      onSubmit={handleFormSubmit}
-      className="relative z-[2] w-full max-w-[450px] rounded-lg bg-white p-6 shadow-2xl sm:m-0 sm:max-w-[380px] sm:p-5 sm:pt-5 md:max-w-[400px] md:shadow-none lg:rounded-xl xl:max-w-[460px] xl:p-9 4xl:max-w-[516px] 4xl:p-12"
-    >
-      <div className="mb-3 sm:mb-0">
-        <span className="font-primary mb-1 text-xl leading-7 text-red sm:block 4xl:text-[28px] 4xl:leading-[44px]">
-          For emergency booking:
-        </span>
-        <Text
-          tag="h1"
-          className="leading-12 mb-4 !text-xl !font-black uppercase text-red sm:!text-[28px] sm:!leading-9  4xl:!text-4xl 4xl:!leading-[52px]"
-        >
-          Call 8102030413
-        </Text>
-        <Text className="mb-2 hidden leading-6 !text-secondary sm:block 3xl:leading-8 4xl:mb-6 4xl:text-lg">
-          For future bookings and queries, fill the below form:
-        </Text>
-      </div>
-      {/* <DualSwitchButton
+    <>
+      <form
+        noValidate
+        onSubmit={handleFormSubmit}
+        className="relative z-[2] w-full max-w-[450px] rounded-lg bg-white p-6 shadow-2xl sm:m-0 sm:max-w-[380px] sm:p-5 sm:pt-5 md:max-w-[400px] md:shadow-none lg:rounded-xl xl:max-w-[460px] xl:p-9 4xl:max-w-[516px] 4xl:p-12"
+      >
+        <div className="mb-3 sm:mb-0">
+          <span className="font-primary mb-1 text-xl leading-7 text-red sm:block 4xl:text-[28px] 4xl:leading-[44px]">
+            For emergency booking:
+          </span>
+          <Text
+            tag="h1"
+            className="leading-12 mb-4 !text-xl !font-black uppercase text-red sm:!text-[28px] sm:!leading-9  4xl:!text-4xl 4xl:!leading-[52px]"
+          >
+            Call 7488155036
+          </Text>
+          <Text className="mb-2 hidden leading-6 !text-secondary sm:block 3xl:leading-8 4xl:mb-6 4xl:text-lg">
+            For future bookings and queries, fill the below form:
+          </Text>
+        </div>
+        {/* <DualSwitchButton
         state={formType}
         onClick={(value) => setFormType(value)}
       /> */}
-      {/* {formType === 'booking' && <BookingForm />}
+        {/* {formType === 'booking' && <BookingForm />}
       {formType === 'pricing' && <PricingForm />} */}
-      <PricingForm />
-      {/* <SearchAutocomplete
+        <PricingForm
+          locationInput={locationInput}
+          setLocationInput={setLocationInput}
+          mobileNumberInput={mobileNumberInput}
+          setMobileNumberInput={setMobileNumberInput}
+          selectedAmbulanceType={selectedAmbulanceType}
+          setSelectedAmbulanceType={setSelectedAmbulanceType}
+          ambulanceTypes={ambulanceTypes}
+          selectedPaymentMode={selectedPaymentMode}
+          setSelectedPaymentMode={setSelectedPaymentMode}
+          paymentModes={paymentModes}
+          selectedAmenities={selectedAmenities}
+          setSelectedAmenities={setSelectedAmenities}
+          amenities={amenities}
+          setFormSubmissionStatus={setFormSubmissionStatus}
+        ></PricingForm>
+        {formSubmissionStatus && (
+          <>
+            <span className="font-primary mb-1 text-xl leading-7 text-red sm:block 4xl:text-[28px] 4xl:leading-[44px]">
+              Form submitted successfully.
+            </span>
+          </>
+        )}
+        {/* <SearchAutocomplete
         onLoad={onLoad}
         onPlacesChanged={onPlacesChanged}
         loader={
@@ -169,7 +248,7 @@ export default function FindTripForm() {
         containerClass="mb-3"
         popperClassName="homepage-datepicker"
       /> */}
-      {/* <DatePickerInput
+        {/* <DatePickerInput
         label="Return"
         selected={endDate}
         dateFormat="eee dd / LL / yy"
@@ -179,14 +258,23 @@ export default function FindTripForm() {
         containerClass="mb-3"
         popperClassName="homepage-datepicker"
       /> */}
-      <Button
-        type="submit"
-        className="w-full !py-[14px] text-sm !font-bold uppercase leading-6 md:!py-[17px] md:text-base lg:!rounded-xl 3xl:!py-[22px]"
-        rounded="lg"
-        size="xl"
-      >
-        Submit
-      </Button>
-    </form>
+        <Button
+          type="submit"
+          className="w-full !py-[14px] text-sm !font-bold uppercase leading-6 md:!py-[17px] md:text-base lg:!rounded-xl 3xl:!py-[22px]"
+          rounded="lg"
+          size="xl"
+          disabled={
+            formSubmissionStatus ||
+            !(
+              locationInput &&
+              mobileNumberInput &&
+              /^[6-9]\d{9}$/.test(mobileNumberInput)
+            )
+          }
+        >
+          Submit
+        </Button>
+      </form>
+    </>
   );
 }

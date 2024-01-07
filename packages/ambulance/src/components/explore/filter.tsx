@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { useAtom } from 'jotai';
 import { Routes } from '@/config/routes';
@@ -7,7 +8,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Manufacturer from '@/components/explore/manufacturer';
 import LocationInputFilter from '@/components/explore/location-input-filter';
 import FreeCancellation from '@/components/explore/free-cancellation-filter';
-import AmbulanceTypeFilter from '@/components/explore/boat-type-filter';
+import AmbulanceTypeFilter from '@/components/explore/ambulance-type-filter';
 import WithCrewFilter from '@/components/explore/with-crew-filter';
 import TripdateFilter from '@/components/explore/tripdate-filter';
 import CategoryFilter from '@/components/explore/category-filter';
@@ -17,7 +18,6 @@ import GuestFilter from '@/components/explore/guest-filter';
 import { drawerStateAtom } from '@/components/drawers/view';
 import Text from '@/components/ui/typography/text';
 import Button from '@/components/ui/button';
-import { useEffect, useState } from 'react';
 
 interface FilterTypes {
   className?: string;

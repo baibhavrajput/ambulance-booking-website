@@ -5,50 +5,36 @@ import { useQueryParam } from '@/hooks/use-query-param';
 import { useSearchParams } from 'next/navigation';
 import CheckboxGroupDual from '../ui/checkbox-group-dual';
 
-const categories = [
-  { id: 'cat-1', label: 'AC', checked: false, amount: 99 },
-  { id: 'cat-2', label: 'Oxygen', checked: false, amount: 199 },
-  { id: 'cat-3', label: 'Technician', checked: false, amount: 299 },
-  { id: 'cat-4', label: 'Ventilator', checked: false, amount: 399 },
-  // { id: 'cat-5', label: 'Jet ski', checked: false },
-  // { id: 'cat-6', label: 'Houseboat', checked: false },
-];
-
-interface ItemProps {
-  id: string;
-  label: string;
-  checked: boolean;
-  amount: number;
-}
-
-export default function AmenitiesFilter({
-  onAmenitiesFilterChange,
-}: {
+type AmenitiesFilterProps = {
   onAmenitiesFilterChange: (key: number) => void;
-}) {
+  selectedAmenities: any;
+  setSelectedAmenities: any;
+  setFormSubmissionStatus: any;
+};
+
+export default function AmenitiesFilter(props: AmenitiesFilterProps) {
   const searchParams = useSearchParams();
   const manf = searchParams?.get('category');
-  const [selected, setSelected] = useState<ItemProps[]>(categories);
-  const { updateQueryparams } = useQueryParam();
 
   const handleInputChange = (item: any) => {
-    const updatedItems = [...selected];
+    const updatedItems = [...props.selectedAmenities];
     const foundItem = updatedItems.find((elem) => elem.id === item.id);
     if (foundItem) {
       foundItem.checked = !foundItem.checked;
     }
-    setSelected(updatedItems);
-    onAmenitiesFilterChange(foundItem?.amount ?? 0);
+    props.setSelectedAmenities(updatedItems);
+    props.onAmenitiesFilterChange(foundItem?.amount ?? 0);
+    props.setFormSubmissionStatus(false);
   };
 
   // if initial query
   useEffect(() => {
     let m = manf?.split(',');
-    const updatedItems = [...selected];
+    const updatedItems = [...props.selectedAmenities];
     updatedItems.map((elem) => {
       if (m?.includes(elem.label)) elem.checked = true;
     });
-    setSelected(updatedItems);
+    props.setSelectedAmenities(updatedItems);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -65,9 +51,9 @@ export default function AmenitiesFilter({
   // reset
   useEffect(() => {
     if (!manf) {
-      const updatedItems = [...selected];
+      const updatedItems = [...props.selectedAmenities];
       updatedItems.map((elem) => (elem.checked = false));
-      setSelected(updatedItems);
+      props.setSelectedAmenities(updatedItems);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [manf]);
@@ -76,8 +62,8 @@ export default function AmenitiesFilter({
     <CheckboxGroupDual
       label="Additional amenities"
       labelClassName="!text-sm lg:!text-base mb-4 lg:mb-2"
-      data={selected}
-      onChange={(item) => handleInputChange(item)}
+      data={props.selectedAmenities}
+      onChange={(item) => handleInputChange(item) }
     />
   );
 }
